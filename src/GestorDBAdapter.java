@@ -487,9 +487,4 @@ public class GestorDBAdapter {
         }
     }
 
-
-
-
-
-
 }

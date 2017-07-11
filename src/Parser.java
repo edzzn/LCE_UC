@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -10,9 +9,9 @@ import java.util.regex.Matcher;
  */
 public class Parser {
 
-    int operacion;
-    Object[] comando;
-    String codigo;
+    private int operacion;
+    private Object[] comando;
+    private String codigo;
 
     /*
     * Operacion
@@ -34,7 +33,8 @@ public class Parser {
      */
     Parser (String codigo){
         this.codigo = codigo.replace(" ", "");
-        this.operacion = this.getOperacion(codigo);
+        this.operacion = this.getOperacionString(codigo);
+        this.parserizar(operacion, codigo);
     }
 
     public static void main(String[] argv){
@@ -160,6 +160,16 @@ public class Parser {
         try {
 
             Object[] comandoArr = new Object[5];
+
+            /*
+            * [0] = String nombre_tabla1
+            * [1] = ArrayList<String> campos
+            * [2] = String campo_clave
+            * [3] = ArrayList<Integer> Longitudes
+            * [4] = ArrayList<String> campos encriptados
+            *
+            * */
+
             String resto =  comando.substring(10);
 
             String[] arrAux = resto.split("CAMPOS");
@@ -197,9 +207,16 @@ public class Parser {
 
     public static Object[] modificarTabla(String comando) {
         try {
-            comando = comando.replace(" ", "");
 
             Object[] comandoArr = new Object[3];
+
+            /*
+            * [0] = String nombre_tabla
+            * [1] = String nombre_campo
+            * [2] = String nuevo_nombre_campo
+            *
+            * */
+
             String resto = comando.substring(14);
             String[] arrAux = resto.split("CAMPO");
             comandoArr[0] = arrAux[0];
@@ -217,7 +234,9 @@ public class Parser {
     }
 
     public static Object[] eliminarTabla(String comando){
-       
+       /*
+       * [0] = nombre_tabla a eliminar
+       * */
 
         Object[] commandoArr = {comando.substring(8)};
         return commandoArr;
@@ -228,6 +247,13 @@ public class Parser {
            
 
             Object[] comandoArr = new Object[2];
+
+            /*
+            * [0] = String nombre_tabla
+            * [1] = ArrayList<String> vCampos
+            *
+            * */
+
             String resto =  comando.substring(10);
             String[] auxArr = resto.split("VALORES");
             comandoArr[0] = auxArr[0]; // nombre_tabla
@@ -243,9 +269,15 @@ public class Parser {
         try {
 
 
-            comando = comando.replace(" ", "");
-
             Object[] comandoArr = new Object[4];
+
+            /*
+            * [0] = String Nombre Tabla
+            * [1] = String valor campo_clave
+            * [2] = String campo
+            * [3] = String campoNuevo
+            *
+            * */
 
             String resto = comando.substring(10);
             String[] auxArr = resto.split("CLAVE");
@@ -272,6 +304,13 @@ public class Parser {
         try{
            
             Object[] comandoArr = new Object[2];
+
+            /*
+            * [0] =  String nombre_tabla
+            * [1] = String valorCampoClave
+            *
+            * */
+
             String resto = comando.substring(14);
             String[] auxArr = resto.split("CLAVE");
             comandoArr[0] =  auxArr[0];
@@ -385,7 +424,7 @@ public class Parser {
         }
     }
 
-    public int getOperacion(String codigo){
+    private int getOperacionString(String codigo){
         if(codigo.contains("CREARTABLA"))
             return 1;
         else if(codigo.contains("MODIFICARTABLA"))
@@ -406,31 +445,31 @@ public class Parser {
             throw new SecurityException("Lo sentimos, no se ha entendido esa orden.");
     }
 
-    public void parserizar(int operacion, String codigo){
+    private void parserizar(int operacion, String codigo){
         switch (operacion){
             case 1:
-                this.comando = this.crearTabla(codigo);
+                this.comando = crearTabla(codigo);
                 break;
             case 2:
-                this.comando = this.modificarTabla(codigo);
+                this.comando = modificarTabla(codigo);
                 break;
             case 3:
-                this.comando = this.eliminarTabla(codigo);
+                this.comando = eliminarTabla(codigo);
                 break;
             case 4:
-                this.comando = this.unirTabla(codigo);
+                this.comando = unirTabla(codigo);
                 break;
             case 5:
-                this.comando = this.crearRegistro(codigo);
+                this.comando = crearRegistro(codigo);
                 break;
             case 6:
-                this.comando = this.modificarRegistro(codigo);
+                this.comando = modificarRegistro(codigo);
                 break;
             case 7:
-                this.comando = this.eliminarRegistro(codigo);
+                this.comando = eliminarRegistro(codigo);
                 break;
             case 8:
-                this.comando = this.seleccionarRegistro(codigo);
+                this.comando = seleccionarRegistro(codigo);
                 break;
             default:
                 throw new SecurityException("Lo sentimos, no se ha entendido esa orden.");
@@ -440,6 +479,11 @@ public class Parser {
     public Object[] getComando(){
         return this.comando;
     }
+
+    public int getOperacion(){
+        return operacion;
+    }
+
 
     public static void mostrarArray(Object[] arr){
         for(int i = 0; i < arr.length; i++){
