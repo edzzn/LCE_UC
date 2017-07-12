@@ -1,7 +1,10 @@
+package lib;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.csvreader.CsvReader;
 
@@ -59,29 +62,46 @@ public class GestorDBAdapter {
         Parser parser = new Parser(comando);
         operacion = parser.getOperacion();
         comandoParsed = parser.getComando();
+        System.out.println("comando: " + comando);
+        System.out.println("Operacion: " + operacion);
+        System.out.println("comandoParsed: " + comandoParsed);
 
         // validamos que se pudo parserizar el comando
         if(comandoParsed == null){
-            throw new SecurityException("Comando ingresado no es parte de la sintaxis.");
+            throw new SecurityException("lib.Comando ingresado no es parte de la sintaxis.");
         }
 
         switch (operacion){
             case 1: // Crear Tabla
+
+                /*
+                * [0] = String nombre_tabla1
+                * [1] = ArrayList<String> campos
+                * [2] = String campo_clave
+                * [3] = ArrayList<Integer> Longitudes
+                * [4] = ArrayList<String> campos encriptados
+                *
+                * */
+
                 // Validamos la existencia de la tabla
                 String nombreTabla = (String) comandoParsed[0];
                 if(this.BuscarTabla(nombreTabla))
                     throw new SecurityException("Error, el nombre de la tabla que se desea crear ya existe");
                 // Validamos la longitud
-                ArrayList<Integer> longitudes = (ArrayList<Integer>) comandoParsed[3];
+                ArrayList<Integer> longitudes = (ArrayList<Integer>) (List) comandoParsed[3];
+
                 for(int i=0; i<longitudes.size(); i++) {
-                    if(longitudes.get(i) <= 0){
+                    int longitud = longitudes.get(i);
+                    if(longitud <= 0){
+                        System.out.println("Longitud " + longitudes.get(i));
                         throw new SecurityException("Error, la longitud de los campos debe ser mayor a cero");
                     }
                 }
+                System.out.println(longitudes);
 
                 // Validamos que el campo clave se encuentre dentro de los campos
-                ArrayList<String> campos = (ArrayList<String>) comandoParsed[2];
-                String campo_clave = (String) comandoParsed[1];
+                ArrayList<String> campos = (ArrayList<String>) (List) comandoParsed[1];
+                String campo_clave = (String) comandoParsed[2];
                 if(!campos.contains(campo_clave)){
                     throw new SecurityException("Error, El campo claveno se encuentra en los campos");
 
@@ -92,6 +112,12 @@ public class GestorDBAdapter {
                 break;
 
             case 2: // Modificar Tabla
+                /*
+                * [0] = String nombre_tabla
+                * [1] = String nombre_campo
+                * [2] = String nuevo_nombre_campo
+                *
+                * */
                 // Validamos que la tabla existe
                 nombreTabla = (String) comandoParsed[0];
                 if(!this.BuscarTabla(nombreTabla)){
@@ -134,7 +160,9 @@ public class GestorDBAdapter {
                 gestor.operar(comandoParsed, operacion);
                 break;
             case 3: // Eliminar Tabla
-
+                /*
+                * [0] = nombre_tabla a eliminar
+                * */
                 // Valida existencia de la tabla
                 nombreTabla = (String) comandoParsed[0];
 

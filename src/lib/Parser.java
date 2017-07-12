@@ -1,3 +1,5 @@
+package lib;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -33,8 +35,8 @@ public class Parser {
      */
     Parser (String codigo){
         this.codigo = codigo.replace(" ", "");
-        this.operacion = this.getOperacionString(codigo);
-        this.parserizar(operacion, codigo);
+        this.operacion = this.getOperacionString(this.codigo);
+        this.parserizar(operacion, this.codigo);
     }
 
     public static void main(String[] argv){
@@ -156,7 +158,7 @@ public class Parser {
 //        mostrarArray(comandoArray2);
     }
 
-    public static Object[] crearTabla(String comando){
+    public Object[] crearTabla(String comando){
         try {
 
             Object[] comandoArr = new Object[5];
@@ -205,7 +207,7 @@ public class Parser {
         }
     }
 
-    public static Object[] modificarTabla(String comando) {
+    public Object[] modificarTabla(String comando) {
         try {
 
             Object[] comandoArr = new Object[3];
@@ -233,7 +235,7 @@ public class Parser {
         }
     }
 
-    public static Object[] eliminarTabla(String comando){
+    public Object[] eliminarTabla(String comando){
        /*
        * [0] = nombre_tabla a eliminar
        * */
@@ -242,7 +244,7 @@ public class Parser {
         return commandoArr;
     }
 
-    public static Object[] crearRegistro(String comando){
+    public Object[] crearRegistro(String comando){
         try{
            
 
@@ -265,7 +267,7 @@ public class Parser {
         }
     }
 
-    public static Object[] modificarRegistro(String comando){
+    public Object[] modificarRegistro(String comando){
         try {
 
 
@@ -300,7 +302,7 @@ public class Parser {
         }
     }
 
-    public static Object[] eliminarRegistro(String comando){
+    public Object[] eliminarRegistro(String comando){
         try{
            
             Object[] comandoArr = new Object[2];
@@ -322,7 +324,7 @@ public class Parser {
         }
     }
 
-    public static Object[] seleccionarRegistro(String comando){
+    public Object[] seleccionarRegistro(String comando){
         try {
            
 
@@ -371,7 +373,7 @@ public class Parser {
         }
     }
 
-    public static Object[] unirTabla(String comando){
+    public Object[] unirTabla(String comando){
         try {
            
 
@@ -425,6 +427,7 @@ public class Parser {
     }
 
     private int getOperacionString(String codigo){
+        System.out.println("Codigo en GetOperacion " + codigo);
         if(codigo.contains("CREARTABLA"))
             return 1;
         else if(codigo.contains("MODIFICARTABLA"))

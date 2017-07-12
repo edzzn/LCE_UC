@@ -1,4 +1,4 @@
-/**
+package lib; /**
  * Created by edzzn on 7/8/17.
  */
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
@@ -56,7 +56,7 @@ public class ComandoRegex {
 //        // Now create matcher object.
 //        Matcher m = r.matcher(comando);
 //        if (m.find( )) {
-//            System.out.println("Comando: " + m.group(0) );
+//            System.out.println("lib.Comando: " + m.group(0) );
 //            System.out.println("Primer valor: " + m.group(1) );
 //            System.out.println("Segundo valor: " + m.group(2) );
 //            System.out.println("Tercer Valor: " + m.group(3) );
@@ -83,7 +83,7 @@ public class ComandoRegex {
 //        // Now create matcher object.
 //        Matcher m2 = r2.matcher(comando2);
 //        if (m2.find( )) {
-//            System.out.println("Comando: " + m2.group(0) );
+//            System.out.println("lib.Comando: " + m2.group(0) );
 //            System.out.println("Primer valor: " + m2.group(1) );
 //            System.out.println("Segundo valor: " + m2.group(2) );
 //            System.out.println("Tercer Valor: " + m2.group(3) );
@@ -94,7 +94,7 @@ public class ComandoRegex {
 //            System.out.println("Octavo Valor: " + m2.group(8) );;
 //            System.out.println("Noveno Valor: " + m2.group(9) );
 //        }else {
-//            System.out.println("Comando: " + m2.group(0) );
+//            System.out.println("lib.Comando: " + m2.group(0) );
 //            System.out.println("NO MATCH");
 
     }
