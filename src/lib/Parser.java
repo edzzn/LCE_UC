@@ -127,10 +127,10 @@ public class Parser {
 
 
 
-        //        String comando = "ELIMINAR nombre_tabla";
-//       
-////        Object[] comandoArray = modificarTabla(comando);
-//        Object[] comandoArray = {comando.substring(8)};
+                String comando = "ELIMINAR TABLA nombre_tabla";
+
+//        Object[] comandoArray = P.eliminarTabla(comando);
+////        Object[] comandoArray = {comando.substring(8)};
 //        mostrarArray(comandoArray);
 
 
@@ -240,7 +240,7 @@ public class Parser {
        * [0] = nombre_tabla a eliminar
        * */
 
-        Object[] commandoArr = {comando.substring(8)};
+        Object[] commandoArr = {comando.substring(13)};
         return commandoArr;
     }
 
