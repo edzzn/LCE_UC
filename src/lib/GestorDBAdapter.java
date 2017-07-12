@@ -505,6 +505,10 @@ public class GestorDBAdapter {
                 }
                 if(posicion == -1) throw new SecurityException("Error interno, la tabla " + nombreTabla + " no posee ese campo");
 
+                // Agregamos el parametro posición del campo en
+                // la tabla
+                comandoParsed[5] = posicion;
+
 
                 // Datos validados
                 gestor.operar(comandoParsed, operacion);

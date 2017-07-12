@@ -328,13 +328,14 @@ public class Parser {
         try {
            
 
-            Object[] comandoArr = new Object[5];
+            Object[] comandoArr = new Object[6];
             /*
             * [0] = nombre_tabla
             * [1] = nombre_campo
             * [2] = valor campo
             * [3] = Ordenado asc/dsc
             * [4] = numElementosMostrar
+            * [5] = ubicacion del campo en la tabla
             *
             * */
 
