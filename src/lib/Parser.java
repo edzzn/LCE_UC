@@ -306,12 +306,12 @@ public class Parser {
     public Object[] eliminarRegistro(String comando){
         try{
            
-            Object[] comandoArr = new Object[2];
+            Object[] comandoArr = new Object[3];
 
             /*
             * [0] =  String nombre_tabla
             * [1] = String valorCampoClave
-            *
+            * [2] = Int posiciónCampo
             * */
 
             String resto = comando.substring(14);

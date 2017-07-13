@@ -484,6 +484,9 @@ public class GestorDBAdapter {
                     throw new Error("Error, algo salio mal con los archivos internos");
                 }
 
+                // agregamos al comando la posición campo clave
+                comandoParsed[2] = posicion;
+
                 // Datos validados
                 gestor.operar(comandoParsed, operacion);
 
