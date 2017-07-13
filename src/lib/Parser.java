@@ -40,34 +40,34 @@ public class Parser {
     }
 
     public static void main(String[] argv){
-//        String comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" ORDENADO asc VER 50";
-//        Object[] comandoArr = unirTabla(comando);
-//        System.out.println(comando);
-//        mostrarArray(comandoArr);
-//
-//        System.out.println("");
-//        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" ORDENADO dsc VER 50";
-//        comandoArr = unirTabla(comando);
-//        System.out.println(comando);
-//        mostrarArray(comandoArr);
-//
-//        System.out.println("");
-//        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" ORDENADO dsc";
-//        comandoArr = unirTabla(comando);
-//        System.out.println(comando);
-//        mostrarArray(comandoArr);
-//
-//        System.out.println("");
-//        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" VER 50";
-//        comandoArr = unirTabla(comando);
-//        System.out.println(comando);
-//        mostrarArray(comandoArr);
-//
-//        System.out.println("");
-//        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\"";
-//        comandoArr = unirTabla(comando);
-//        System.out.println(comando);
-//        mostrarArray(comandoArr);
+        String comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" ORDENADO asc VER 50";
+        Object[] comandoArr = unirTabla(comando);
+        System.out.println(comando);
+        mostrarArray(comandoArr);
+
+        System.out.println("");
+        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" ORDENADO dsc VER 50";
+        comandoArr = unirTabla(comando);
+        System.out.println(comando);
+        mostrarArray(comandoArr);
+
+        System.out.println("");
+        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" ORDENADO dsc";
+        comandoArr = unirTabla(comando);
+        System.out.println(comando);
+        mostrarArray(comandoArr);
+
+        System.out.println("");
+        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\" VER 50";
+        comandoArr = unirTabla(comando);
+        System.out.println(comando);
+        mostrarArray(comandoArr);
+
+        System.out.println("");
+        comando = "UNIR nombre_tabla1, nombre_tabla2 POR nombre_campo=\"Algo\"";
+        comandoArr = unirTabla(comando);
+        System.out.println(comando);
+        mostrarArray(comandoArr);
 
 //        String comando = "SELECCIONAR DE nombre_tabla DONDE nombre_campo = \"Algo\" ORDENADO asc VER 20 ";
 //       
@@ -127,7 +127,7 @@ public class Parser {
 
 
 
-                String comando = "ELIMINAR TABLA nombre_tabla";
+//                String comando = "ELIMINAR TABLA nombre_tabla";
 
 //        Object[] comandoArray = P.eliminarTabla(comando);
 ////        Object[] comandoArray = {comando.substring(8)};
@@ -375,8 +375,9 @@ public class Parser {
         }
     }
 
-    public Object[] unirTabla(String comando){
+    public static Object[] unirTabla(String comando){
         try {
+            comando = comando.replace(" ", "");
            
 
             Object[] comandoArr = new Object[6];
@@ -393,15 +394,17 @@ public class Parser {
             String resto = comando.substring(4);
             String nombres_tablas = resto.substring(0, resto.indexOf("POR")); //nombres_tablas
             String[] auxArr = nombres_tablas.split(",");
-            comandoArr[0] = auxArr[0];
-            comandoArr[1] = auxArr[0];
 
+            comandoArr[0] = auxArr[0];
+            comandoArr[1] = auxArr[1];
             resto = resto.substring(resto.indexOf("POR") + 3);
 //            System.out.println("Resto  " +resto);
+//            System.out.println("nombreCampo " + resto.substring(0, resto.indexOf("=")));
+//            System.out.println("valorCampo " + resto.substring(resto.indexOf("\"")+1, resto.lastIndexOf("\"")));
             comandoArr[2] = resto.substring(0, resto.indexOf("="));
             comandoArr[3] = resto.substring(resto.indexOf("\"")+1, resto.lastIndexOf("\""));
 
-
+            System.out.println(resto);
             if(resto.contains("ORDENADO")){
                 String ordenado = resto.substring(resto.indexOf("ORDENADO") + 8, resto.indexOf("ORDENADO") + 11 );
 //                System.out.println(ordenado);
@@ -438,7 +441,7 @@ public class Parser {
             return 3;
         else if(codigo.contains("UNIR"))
             return 4;
-        else if(codigo.contains("CREARREGISTRO"))
+        else if(codigo.contains("INSERTAREN"))
             return 5;
         else if(codigo.contains("MODIFICARREGISTRO"))
             return 6;
