@@ -23,7 +23,9 @@ public class Script {
         * argv[2] longitudes "1,2,3,4,5"
         *
         * */
-        String filedir = "Filedir.csv";
+//        String filedir = "filesBD\\nombreTabla.bd";
+        String filedir = argv[0];
+//        System.out.println(filedir.substring(filedir.lastIndexOf("\\")+1, filedir.lastIndexOf(".")));
 
         if(!new File(filedir).exists())
             throw new Error("Archivo "+ filedir + " no encontrado.");
@@ -34,7 +36,7 @@ public class Script {
 
             boolean primeraPasada = true;
             while(archivoCSV.readRecord()) {
-                String nombre_tabla = filedir.replace("csv", "");
+                String nombre_tabla = filedir.substring(filedir.lastIndexOf("\\")+1, filedir.lastIndexOf("."));
 
                 if(primeraPasada == true) {
                     // primera fila, leemos la cabecera y creamos la tabla
@@ -83,8 +85,8 @@ public class Script {
                         break;
                     }
                 }
-                Gestion_Registros registroNuevo = new Gestion_Registros(nombre_tabla, vCampos);
-                registroNuevo.crearRegistros();
+//                Gestion_Registros registroNuevo = new Gestion_Registros(nombre_tabla, vCampos);
+//                registroNuevo.crearRegistros();
             }
 
             archivoCSV.close();
