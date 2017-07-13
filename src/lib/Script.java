@@ -72,6 +72,7 @@ public class Script {
                     Gestion_Tablas nuevaTabla = new Gestion_Tablas(nombre_tabla, campos, campo_clave, longitudes, camposEncriptados);
 
                     nuevaTabla.crearTabla();
+                    primeraPasada = false;
                 } // Fin primera pasada
 
                 // desde la segunda pasada en adelante se agregaran los nuevos registros
