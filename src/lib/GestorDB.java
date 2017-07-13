@@ -118,7 +118,7 @@ public class GestorDB {
                 System.out.println("AVISO: Tabla ...");
 
                 break;
-            case 8:     //  SELECCIONAR TABLA
+            case 8:     //  SELECCIONAR Registros
                 System.out.println("Seleccionar Registro");
                 System.out.println("Tabla: " +  comando[0]);
                 System.out.println("Campo: " +  comando[1]);
@@ -128,6 +128,19 @@ public class GestorDB {
 
                 System.out.println("Eliminando Registro...");
                 //  CODIGO DE SELECCIONAR TABLA
+
+                /*
+                * [0] = nombre_tabla
+                * [1] = nombre_campo
+                * [2] = valor campo
+                * [3] = Ordenado asc/dsc
+                * [4] = numElementosMostrar
+                * [5] = ubicacion del campo en la tabla
+                *
+                * */
+                Seleccionar select = new Seleccionar(comando);
+                select.operar();
+
                 System.out.println("AVISO: Tabla ...");
 
                 break;

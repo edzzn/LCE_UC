@@ -17,22 +17,18 @@ public class Seleccionar {
     String valorCampo;
     String ordenamiento;
     int numElementosMostrar;
+    int posicion;
+    Object[] comando;
 
-    void operar(Object[] comando){
-        /*
-        * [0] = nombre_tabla
-        * [1] = nombre_campo
-        * [2] = valor campo
-        * [3] = Ordenado asc/dsc
-        * [4] = numElementosMostrar
-        * [5] = ubicacion del campo en la tabla
-        *
-        * */
-        String nombreTabla = (String) comando[0];
-        String nombreCampo = (String) comando[1];
-        String valorCampo = (String) comando[2];
-        int posicion = (int) comando[5];
+    public Seleccionar(Object[] comando){
+        this.comando = comando;
+        this.nombreTabla = (String) comando[0];
+        this.nombreCampo = (String) comando[1];
+        this.valorCampo = (String) comando[2];
+        this.posicion = (int) comando[5];
+    }
 
+    void operar(){
         try {
 
             //Numero de filas y columnas
@@ -47,7 +43,7 @@ public class Seleccionar {
                 ordenamiento = (String) comando[3];
                 // Ordenamos
                 /* LLAMAR AL METODO DE ORDENAMIENTO AQUI */
-//                Ordenamiento.procesar(posicion, nombreTabla, columnas);
+//                Ordenamiento.procesar(posicion, nombreTabla, columnas, ordenamiento);
             }
 
 

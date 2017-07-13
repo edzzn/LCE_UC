@@ -24,6 +24,15 @@ public class Gestion_Tablas {
     String fileMETA = "ArchivosBD\\META.bd";
     
     public Gestion_Tablas(String nombreTabla, ArrayList<String> campos, String campoClave, ArrayList<String> longitudCampos, ArrayList<String> camposEncriptados){
+                    /*
+            * [0] = String nombre_tabla
+            * [1] = String nombre_campo
+            * [2] = String valor campo
+            * [3] = String Ordenado asc/dsc
+            * [4] = int numElementosMostrar
+            * [5] = Int ubicacion del campo en la tabla
+            *
+            * */
         this.nombreTabla = nombreTabla;
         this.campos = campos;
         this.campoClave = campoClave;
