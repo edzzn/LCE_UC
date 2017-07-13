@@ -271,13 +271,14 @@ public class Parser {
         try {
 
 
-            Object[] comandoArr = new Object[4];
+            Object[] comandoArr = new Object[5];
 
             /*
             * [0] = String Nombre Tabla
             * [1] = String valor campo_clave
             * [2] = String campo
             * [3] = String campoNuevo
+            * [4] = Int posición Campo clave
             *
             * */
 

@@ -410,6 +410,9 @@ public class GestorDBAdapter {
                 if(campoClaveReal == null)
                     mensaje.mostrarMensaje("Error, No se encontraron los datos en la tabla");
 
+                // agregamos la posición del campo a el comando
+                comandoParsed[4] = posicionCampo;
+
                 // Datos validados
                 gestor.operar(comandoParsed, operacion);
 
