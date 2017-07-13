@@ -39,17 +39,17 @@ public class Seleccionar {
             File path = new File ("filesBD\\" + nombreTabla + ".bd");
             CsvReader reader = new CsvReader("filesBD\\" + nombreTabla + ".bd");
 
+            int filas = 0;
+            int columnas = 0;
+            columnas = reader.getColumnCount();
+
             if ( comando[2] != null){
                 ordenamiento = (String) comando[3];
                 // Ordenamos
                 /* LLAMAR AL METODO DE ORDENAMIENTO AQUI */
+//                Ordenamiento.procesar(posicion, nombreTabla, columnas);
             }
 
-
-
-            int filas = 0;
-            int columnas = 0;
-            columnas = reader.getColumnCount();
 
             if ( comando[4] == null){
                 // si NO se inserto el numero de elementos a mostrar

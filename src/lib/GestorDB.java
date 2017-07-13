@@ -7,7 +7,7 @@ import java.util.List;
  * Created by edzzn on 7/8/17.
  */
 public class GestorDB {
-
+    Mensaje mensaje = new Mensaje();
     private static GestorDB instance = null;
 
     //    Implementación del patron Singleton
@@ -26,80 +26,72 @@ public class GestorDB {
     public void operar(Object[] comando, int operacion) {
 
         if(comando.length<=0 || comando == null)
-            throw new Error("Lo sentimos, algo ha salido mal");
+            mensaje.mostrarMensaje("Error en la lectura.");
+
 
         System.out.println("------------------------------------------");
         switch(operacion){
-            case 1: // crearTabla
+            case 1:     // CREAR TABLA
                 System.out.println("Crear tabla");
-                System.out.println("Nombre tabla: " + (String) comando[0]);
-                System.out.println("Campos: " + (ArrayList<String>) (List) comando[1]);
+                System.out.println("Nombre tabla: " + comando[0]);
+                System.out.println("Campos: " + comando[1]);
                 System.out.println("Campo clave: " + (String) comando[2]);
-                System.out.println("Longitud: " + (ArrayList<String>) comando[3]);
-                System.out.println("Campos a encriptar: " + (ArrayList<String>) (List) comando[4]);
+                System.out.println("Longitud: " + comando[3]);
+                System.out.println("Campos a encriptar: " + (List) comando[4]);
 
-//                //Instanciación a través del Abstract Factory
-//
-//                ProcesosFactory factory = new TablaFactory();
-//                CreacionTemplate crear = factory.creacionProceso();
-//                crear.operation(comando);
-//                Aplicacion.estadoOperacion = "Se ha creado la tabla " + (String) comando[0] + "";
+                System.out.println("Creando Tabla...");
+                Gestion_Tablas nuevaTabla = new Gestion_Tablas((String) comando[0], (ArrayList<String>) comando[1], (String) comando[2],(ArrayList<String>) comando[3], (ArrayList<String>) comando[4]);
+                nuevaTabla.crearTabla();
+                System.out.println("AVSO: Tabla creada...");
+
                 break;
-            case 2: // modificarTabla
+            case 2:     // MODIFICA TABLA
                 System.out.println("Modificar tabla");
 
-                System.out.println("Tabla: " + (String) comando[0]);
-                System.out.println("Nombre del campo a modificar: " + (String) comando[1]);
-                System.out.println("Nuevo valor del campo: " + (String) comando[2]);
+                System.out.println("Tabla: " + comando[0]);
+                System.out.println("Nombre del campo a modificar: " + comando[1]);
+                System.out.println("Nuevo valor del campo: " + comando[2]);
 
-//                //Instanciación a través del Abstract Factory
-//
-//                ProcesosFactory factory = new TablaFactory();
-//                ModificacionTemplate modificar = factory.modificacionProceso();
-//                modificar.operation(comando);
-//
-//                Aplicacion.estadoOperacion = "Se ha modificado la tabla " + (String) comando[0] + "";
-//
+                System.out.println("Modificando Tabla...");
+                Gestion_Tablas tablaModificar = new Gestion_Tablas((String) comando[0], (String) comando[1], (String) comando[2]);
+                tablaModificar.modificarTabla();
+                System.out.println("AVSO: Tabla modificada...");
+
                 break;
-            case 3: // eliminarTabla
+            case 3:     // ELIMINAR TABLA
                 System.out.println("Eliminar");
-                System.out.println("Tabla: " + (String) comando[0]);
+                System.out.println("Tabla: " + comando[0]);
 
-//                //Instanciación a través del Abstract Factory
-//
-//                ProcesosFactory factory = new TablaFactory();
-//                EliminacionTemplate eliminar = factory.eliminacionProceso();
-//                eliminar.operation(comando);
-//
-//                Aplicacion.estadoOperacion = "Se ha eliminado la tabla " + (String) comando[0] + "";
+                System.out.println("Eliminando Tabla...");
+                Gestion_Tablas tablaEliminar = new Gestion_Tablas((String) comando[0]);
+                tablaEliminar.eliminarTabla();
+                System.out.println("AVISO: Tabla Eliminada...");
+
                 break;
-            case 4: // unirTabla
+            case 4:     // UNIR TABLAS
                 System.out.println("Unir tabla");
-                System.out.println("Tabla 1: " + (String) comando[0]);
-                System.out.println("Tabla 2: " + (String) comando[1]);
-                System.out.println("Campo: " + (String) comando[2]);
-                System.out.println("Valor Campo: " + (String) comando[3]);
-                System.out.println("Ordenado: " + (String) comando[4]);
-                System.out.println("Ver: " + (String) comando[5]);
+                System.out.println("Tabla 1: " + comando[0]);
+                System.out.println("Tabla 2: " + comando[1]);
+                System.out.println("Campo: " + comando[2]);
+                System.out.println("Valor Campo: " + comando[3]);
+                System.out.println("Ordenado: " + comando[4]);
+                System.out.println("Ver: " + comando[5]);
 //
 //                new UnirTablas(comando).Visualizar();
 //
 //                Aplicacion.estadoOperacion = "Se uniron las tablas " + (String) comando[0] + " y " + (String) comando[1];
                 break;
-            case 5: // crearRegistro
+            case 5:     // AGREGAR REGISTRO
                 System.out.println("Agregar Registro");
-                System.out.println("Tabla: " + (String) comando[0]);
-                System.out.println("Valores de los campos: " + (ArrayList<String>) comando[1]);
+                System.out.println("Tabla: " + comando[0]);
+                System.out.println("Valores de los campos: " + comando[1]);
 
-                //Instanciación a través del Abstract Factory
+                System.out.println("Agregando Registro...");
+                //  CODIGO DE CREAR REGISTRO
+                System.out.println("AVISO: Registro ingresado...");
 
-//                ProcesosFactory factory = new RegistroFactory();
-//                CreacionTemplate crear = factory.creacionProceso();
-//                crear.operation(comando);
-//
-//                Aplicacion.estadoOperacion = "Se agrego el registro a la tabla " + (String) comando[0] + "";
                 break;
-            case 6: // modificarRegistro
+            case 6:     // MODIFICAR REGISTRO
                 System.out.println("Modificar Registro");
                 String nombreTabla = (String) comando[1];
                 String campoClave = (String) comando[2];
@@ -111,43 +103,36 @@ public class GestorDB {
                 System.out.println("Nombre del campo a modificar: " + nombreCampo);
                 System.out.println("Nuevo valor del campo: " + valorCampo);
 
-                //Instanciación a través del Abstract Factory
+                System.out.println("Modificando Registro...");
+                //  CODIGO DE MODIFICAR REGISTRO
+                System.out.println("AVISO: Registro Modificado...");
 
-//                ProcesosFactory factory = new RegistroFactory();
-//                ModificacionTemplate modificar = factory.modificacionProceso();
-//                modificar.operation(comando);
-//
-//                Aplicacion.estadoOperacion = "Se modifico un registro de la tabla " + nombreTabla + "";
                 break;
-            case 7: // eliminarRegistro
+            case 7:     // ELIMINAR REGISTRO
                 System.out.println("Eliminar Registro");
-                System.out.println("Tabla: " + (String) comando[0]);
-                System.out.println("Valor campo clave: " + (String) comando[1]);
+                System.out.println("Tabla: " + comando[0]);
+                System.out.println("Valor campo clave: " + comando[1]);
 
-                //Instanciación a través del Abstract Factory
+                System.out.println("Eliminando Registro...");
+                //  CODIGO DE ELIMINAR REGISTRO
+                System.out.println("AVISO: Tabla ...");
 
-//                ProcesosFactory factory = new RegistroFactory();
-//                EliminacionTemplate eliminar = factory.eliminacionProceso();
-//                eliminar.operation(comando);
-//
-//                Aplicacion.estadoOperacion = "Se elimino un registro de la tabla " + (String) comando[1] + "";
                 break;
-            case 8: // seleccionarRegistro
+            case 8:     //  SELECCIONAR TABLA
                 System.out.println("Seleccionar Registro");
-                System.out.println("Tabla: " + (String) comando[0]);
-                System.out.println("Campo: " + (String) comando[1]);
-                System.out.println("Valor: " + (String) comando[2]);
-                System.out.println("Ordenado: " + (String) comando[3]);
-                System.out.println("Ver: " + (String) comando[4]);
+                System.out.println("Tabla: " +  comando[0]);
+                System.out.println("Campo: " +  comando[1]);
+                System.out.println("Valor: " + comando[2]);
+                System.out.println("Ordenado: " + comando[3]);
+                System.out.println("Ver: " + comando[4]);
 
+                System.out.println("Eliminando Registro...");
+                //  CODIGO DE SELECCIONAR TABLA
+                System.out.println("AVISO: Tabla ...");
 
-//                try {new SeleccionarTabla(comando).Visualizar();}
-//                catch (IOException ex) {throw new Error(ex.getMessage());}
-//
-//                Aplicacion.estadoOperacion = "Se seleccionarion registros de la tabla " + comando[0] + "";
                 break;
             default:
-                throw new SecurityException("Algo salio mal.");
+                mensaje.mostrarMensaje("No se entendio el comando.");
         }
     }
 

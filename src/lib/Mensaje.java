@@ -1,25 +1,42 @@
-public class Mensaje extends javax.swing.JDialog {
-private javax.swing.JPanel contentPane;
-private javax.swing.JButton buttonOK;
-private javax.swing.JButton buttonCancel;
+package lib;
 
-public Mensaje(){
-setContentPane(contentPane);
-setModal(true);
-getRootPane().setDefaultButton(buttonOK);
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-buttonOK.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onOK();}});
-}
+public class Mensaje extends JDialog {
+    private JPanel contentPane;
+    private JButton buttonOK;
+    private JLabel txtMensaje;
 
-private void onOK(){
- // add your code here
-dispose();
-}
+    public Mensaje() {
+        setContentPane(contentPane);
+        setModal(true);
+        this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(buttonOK);
 
-public static void main(String[] args){
-Mensaje dialog = new Mensaje();
-dialog.pack();
-dialog.setVisible(true);
-System.exit(0);
-}
+        buttonOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onOK();
+            }
+        });
+    }
+
+    private void onOK() {
+        // add your code here
+        dispose();
+    }
+
+    public void mostrarMensaje(String mensaje){
+        txtMensaje.setText(mensaje);
+        this.pack();
+        this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        Mensaje dialog = new Mensaje();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
+    }
 }

@@ -240,7 +240,7 @@ public class Parser {
        * [0] = nombre_tabla a eliminar
        * */
 
-        Object[] commandoArr = {comando.substring(13)};
+        Object[] commandoArr = {comando.substring(8)};
         return commandoArr;
     }
 
